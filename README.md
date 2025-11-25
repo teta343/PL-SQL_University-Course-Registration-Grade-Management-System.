@@ -1,3 +1,6 @@
+NAME: TETA KEVINE
+ID: 27973
+
 # PL-SQL_University-Course-Registration-Grade-Management-System.
  PROJECT :  University Course Registration & Grade Management System
 
@@ -5,7 +8,8 @@ Below is the FULL PROJECT, including:
 
 ✅ Tables creation script
 ✅ Sample data script
-✅ Full PL/SQL main program
+✅ VARRAY declaration & initialization
+✅ Processing loop with GOTO
 
 1. DATABASE/TABLES_CREATION.sql
 
@@ -85,4 +89,46 @@ INSERT INTO grade_history VALUES (4, 2, 103, 'A-', 2024, 'Fall');
 COMMIT;
 
 SELECT 'Sample data inserted!' AS message FROM dual;
+
+
+1. VARRAY declaration & initialization
+TYPE course_array IS VARRAY(5) OF NUMBER;
+v_course_list course_array := course_array(101, 102, 103);
+
+
+What: Define a fixed-size array type course_array that can hold up to 5 course IDs.
+
+Why: VARRAY demonstrates a bounded collection useful for a student's registered courses.
+
+Note: v_course_list.COUNT gives number of elements. Indexing starts at 1.
+
+
+9. Processing loop with GOTO
+
+FOR id IN 1..3 LOOP
+    total_students := total_students + 1;
+
+    IF id = 1 THEN
+        GOTO HONOR_PROCESS;
+    END IF;
+
+    <<REGULAR_PROCESS>>
+    DBMS_OUTPUT.PUT_LINE('Regular Student: ' || v_students(id));
+    CONTINUE;
+
+    <<HONOR_PROCESS>>
+    IF id = 1 THEN
+        DBMS_OUTPUT.PUT_LINE('Honor Student: ' || v_students(id) || ' (Dean''s List)');
+        honor_students := honor_students + 1;
+    END IF;
+END LOOP;
+
+
+What happens: The loop iterates student ids 1..3.
+
+If id=1 the code jumps to the HONOR_PROCESS label using GOTO.
+
+Else, it prints "Regular Student".
+
+Why show GOTO: GOTO demonstrates low-level flow control; used here to short-circuit for honor students.
 
