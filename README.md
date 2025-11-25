@@ -2,30 +2,31 @@ NAME: TETA KEVINE
 ID: 27973
 
 # PL-SQL_University-Course-Registration-Grade-Management-System.
- PROJECT :  University Course Registration & Grade Management System
+University Course Registration & Grade Management System
 
-Below is the FULL PROJECT, including:
+📌 Project Overview
 
-✅ Tables creation script
-✅ Sample data script
-✅ VARRAY declaration & initialization
-✅ Processing loop with GOTO
+This project implements a University Course Registration & Grade Management System using Oracle PL/SQL.
+It demonstrates:
 
-1. DATABASE/TABLES_CREATION.sql
+Table creation, constraints, and schema design
 
-What tables_creation.sql does — step-by-step
+Sample data insertion
 
-Creates students table with columns: student_id, first_name, last_name, program.
+Use of %ROWTYPE, VARRAY collections, and records
 
-Creates courses table: course_id, course_name, credit_hours.
+PL/SQL loops with GOTO statements
 
-Creates grade_history table to store grades (with foreign keys to students and courses).
+Basic academic processing logic (students, courses, grades)
 
-Commits changes and prints a confirmation message.
+The system simulates a simplified student-course-grade workflow used in higher education institutions.
 
-Purpose: schema foundation so PL/SQL code can query and demonstrate %ROWTYPE records and sample data.
+🏗️ Database Structure
 
--- Create Students table
+1️⃣ Students Table
+
+Stores student personal and program details.
+
 CREATE TABLE students (
     student_id NUMBER PRIMARY KEY,
     first_name VARCHAR2(50),
@@ -33,14 +34,20 @@ CREATE TABLE students (
     program VARCHAR2(50)
 );
 
--- Create Courses table
+2️⃣ Courses Table
+
+Stores course information.
+
 CREATE TABLE courses (
     course_id NUMBER PRIMARY KEY,
     course_name VARCHAR2(100),
     credit_hours NUMBER
 );
 
--- Create Grade History table
+3️⃣ Grade History Table
+
+Tracks all grade records per student and course.
+
 CREATE TABLE grade_history (
     history_id NUMBER PRIMARY KEY,
     student_id NUMBER,
@@ -52,58 +59,50 @@ CREATE TABLE grade_history (
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
 
-COMMIT;
 
-SELECT 'Tables created successfully!' AS message FROM dual
+✔️ All tables successfully created
+✔️ Includes PKs, FKs, and valid data types
 
-2 DATABASE /SAMPLE_DATA.sql
+📊 Sample Data (Inserted)
 
-What sample_data.sql does — step-by-step
-
-Inserts a few student rows (Alice, Bob, Charlie).
-
-Inserts a few course rows (Database Systems, Computer Networks, Operating Systems).
-
-Inserts grade history rows for testing (grade_history).
-
-Commits the inserts and prints confirmation.
-
-Purpose: provides realistic data so the PL/SQL demo can SELECT ... INTO and show record examples and logic outputs.
-
--- Insert students
+Students
 INSERT INTO students VALUES (1, 'Alice', 'Johnson', 'Computer Science');
 INSERT INTO students VALUES (2, 'Bob', 'Smith', 'Information Technology');
 INSERT INTO students VALUES (3, 'Charlie', 'Brown', 'Software Engineering');
 
--- Insert courses
+Courses
 INSERT INTO courses VALUES (101, 'Database Systems', 3);
 INSERT INTO courses VALUES (102, 'Computer Networks', 4);
 INSERT INTO courses VALUES (103, 'Operating Systems', 3);
 
--- Insert grade history
+Grade History
 INSERT INTO grade_history VALUES (1, 1, 101, 'A', 2024, 'Fall');
 INSERT INTO grade_history VALUES (2, 1, 102, 'B', 2024, 'Fall');
 INSERT INTO grade_history VALUES (3, 2, 101, 'B+', 2024, 'Fall');
 INSERT INTO grade_history VALUES (4, 2, 103, 'A-', 2024, 'Fall');
 
-COMMIT;
 
-SELECT 'Sample data inserted!' AS message FROM dual;
+✔️ Sample data provides realistic scenarios
+✔️ Enables testing of queries, %ROWTYPE, lookups, etc
 
 
-1. VARRAY declaration & initialization
+1️⃣ VARRAY Declaration & Initialization
+
 TYPE course_array IS VARRAY(5) OF NUMBER;
 v_course_list course_array := course_array(101, 102, 103);
 
 
-What: Define a fixed-size array type course_array that can hold up to 5 course IDs.
+Stores up to 5 course IDs
 
-Why: VARRAY demonstrates a bounded collection useful for a student's registered courses.
+Used for representing a student’s registered course list
 
-Note: v_course_list.COUNT gives number of elements. Indexing starts at 1.
+Supports .COUNT and index-based access
 
+🔁 Processing Logic Using GOTO
 
-9. Processing loop with GOTO
+Loop Demonstration
+
+This loop processes three students and classifies the first student as Honor Student using GOTO.
 
 FOR id IN 1..3 LOOP
     total_students := total_students + 1;
@@ -123,12 +122,52 @@ FOR id IN 1..3 LOOP
     END IF;
 END LOOP;
 
+❗ Purpose of GOTO in This Project
 
-What happens: The loop iterates student ids 1..3.
+Demonstrates low-level branching
 
-If id=1 the code jumps to the HONOR_PROCESS label using GOTO.
+Used to jump out of normal flow for special-case handling
 
-Else, it prints "Regular Student".
+Helps show PL/SQL’s support for labeled blocks and alternate logic paths
 
-Why show GOTO: GOTO demonstrates low-level flow control; used here to short-circuit for honor students.
+ Tested Outputs
 
+During execution you will see:
+
+“Tables created successfully!”
+
+“Sample data inserted!”
+
+List of Regular and Honor students
+
+VARRAY iteration output
+
+Grade history processing
+
+🎯 Key Learning Outcomes
+
+By completing this project, you demonstrated:
+
+✔ Database schema creation
+✔ Inserting and validating sample data
+✔ Using VARRAYs in PL/SQL
+✔ Using GOTO and labels
+✔ Working with loops & processing logic
+✔ Understanding student-course-grade relationships
+
+📂 Files Included in Your Project
+File	Purpose
+DATABASE/TABLE_CREATION.sql	Creates all required tables
+DATABASE/SAMPLE_DATA.sql	Inserts realistic sample data
+plsql_processing_block.sql	Contains VARRAY, GOTO logic, loops
+README.md	Full project explanation
+✅ Final Notes
+
+This PL/SQL project demonstrates essential database programming skills required in real academic information systems.
+You have implemented all required components:
+
+✔ Tables
+✔ Sample data
+✔ VARRAY
+✔ GOTO logic
+✔ Loops & processing
